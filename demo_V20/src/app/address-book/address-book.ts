@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-address-book',
-    imports: [ReactiveFormsModule, TranslatePipe, NgClass],
+    imports: [ReactiveFormsModule, TranslatePipe],
     templateUrl: './address-book.html',
     styleUrl: './address-book.css'
 })
@@ -20,14 +19,14 @@ export class AddressBook {
         this.form = this.fb.group({
             id: [0],
             fname: ['', Validators.required],
-            email: ['', [Validators.required,Validators.email]],
+            email: ['', [Validators.required, Validators.email]],
             phones: ['', Validators.required],
             addr: ['']
         });
     }
 
     addRecord() {
-        if(this.form.invalid) {
+        if (this.form.invalid) {
             this.form.markAllAsTouched();
             // alert('Form contains validation issues, kindly provide the mandatory fields.');
             return;
