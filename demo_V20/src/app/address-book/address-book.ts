@@ -29,7 +29,8 @@ export class AddressBook {
     addRecord() {
         if(this.form.invalid) {
             this.form.markAllAsTouched();
-            alert('Form contains validation issues, kindly provide the mandatory fields.');
+            // alert('Form contains validation issues, kindly provide the mandatory fields.');
+            return;
         }
         if (this.recordData.length == 0) {
             this.counter = 0;

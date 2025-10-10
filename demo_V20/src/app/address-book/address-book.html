@@ -4,20 +4,40 @@
     <form class="px-5" [formGroup]="form" (ngSubmit)="addRecord()">
         <div class="form-group mb-2">
             <label for="fname">{{ 'FULL_NAME' | translate }}</label>
-            <input name="fname" type="text" class="form-control" formControlName="fname"
-            [ngClass]="{'is-invalid': form.get('fname')?.errors?.['required']}">
+            <input name="fname" type="text" class="form-control" formControlName="fname">
+
+            @if(form.get('fname')?.errors?.['required'] && form.get('fname')?.touched) {
+                <div class="text-danger">
+                    Full Name is required
+                </div>
+            }
         </div>
 
         <div class="form-group mb-2">
             <label for="email">{{ 'EMAIL' | translate }}</label>
-            <input name="email" type="email" class="form-control" formControlName="email"
-            [ngClass]="{'is-invalid': form.get('email')?.errors?.['required']}">
+            <input name="email" type="email" class="form-control" formControlName="email">
+
+            @if(form.get('email')?.errors?.['required'] && form.get('email')?.touched) {
+            <div class="text-danger">
+                Email is required
+            </div>
+            }
+            @if(form.get('email')?.errors?.['email'] && form.get('email')?.touched) {
+            <div class="text-danger">
+                Invalid email format
+            </div>
+            }
         </div>
 
         <div class="form-group mb-2">
             <label for="phones">{{ 'PHONE_NUMBERS' | translate }}</label>
-            <input name="phones" type="text" class="form-control" formControlName="phones"
-            [ngClass]="{'is-invalid': form.get('phones')?.errors?.['required']}">
+            <input name="phones" type="text" class="form-control" formControlName="phones">
+
+            @if(form.get('phones')?.errors?.['required'] && form.get('phones')?.touched) {
+            <div class="text-danger">
+                Phones is required
+            </div>
+            }
         </div>
 
         <div class="form-group mb-3">
