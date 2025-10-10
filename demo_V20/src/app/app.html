@@ -1,0 +1,21 @@
+<div class="bg-dark d-flex justify-content-between p-1 mb-1">
+    <button class="btn btn-dark fw-4" routerLink="address-book">
+        {{ 'FILL_ADDRESS' | translate }}
+    </button>
+
+    <div class="form-group d-flex align-items-center text-white gap-2">
+        <label for="lankey" class="m-0 text-nowrap">{{ 'SELECT_LANGUAGE' | translate }} :</label>
+
+        <select class="form-select form-select-sm" name="lankey" [(ngModel)]="langKey" (ngModelChange)="changeLanguage($event)">
+
+            @for(lan of languages | keyvalue; track lan.key) {
+            <option [value]="lan.key">{{ lan.value }}</option>
+            }
+
+        </select>
+    </div>
+</div>
+
+<div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,73 @@
+<div class="container mb-2 p-2 bg-color">
+    <h1 class="text-center">{{ 'ADDRESS_BOOK_FORM' | translate }}</h1>
+
+    <form class="px-5" [formGroup]="form" (ngSubmit)="addRecord()">
+        <div class="form-group mb-2">
+            <label for="fname">{{ 'FULL_NAME' | translate }}</label>
+            <input name="fname" type="text" class="form-control" formControlName="fname"
+            [ngClass]="{'is-invalid': form.get('fname')?.errors?.['required']}">
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="email">{{ 'EMAIL' | translate }}</label>
+            <input name="email" type="email" class="form-control" formControlName="email"
+            [ngClass]="{'is-invalid': form.get('email')?.errors?.['required']}">
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="phones">{{ 'PHONE_NUMBERS' | translate }}</label>
+            <input name="phones" type="text" class="form-control" formControlName="phones"
+            [ngClass]="{'is-invalid': form.get('phones')?.errors?.['required']}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="addr">{{ 'ADDRESS' | translate }}</label>
+            <textarea name="addr" class="form-control" formControlName="addr"></textarea>
+        </div>
+
+        <div class="form-group text-center mb-3">
+            <button type="submit" class="btn btn-success me-2">{{ 'ADD_RECORD' | translate }}</button>
+            <button type="reset" class="btn btn-info me-2">{{ 'RESET_FORM' | translate }}</button>
+            <button type="button" class="btn btn-primary" (click)="updateRecord(form)">{{ 'UPDATE_FORM' | translate }}</button>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h3>{{ 'ADDRESS_RECORD_TABLE' | translate }}</h3>
+    @if(recordData.length > 0){
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                @for(head of headings; track head) {
+                <th>{{head | translate}}</th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @for(data of recordData; track data.id) {
+            <tr>
+                <td>{{data.id + 1}}</td>
+                <td>{{data.fname}}</td>
+                <td>{{data.email}}</td>
+                <td>
+                    @for(phone of data.phones; track $index) {
+                    <span>{{phone}}</span>
+                    }
+                </td>
+                <td>{{data.addr}}</td>
+                <td>
+                    <button class="btn btn-danger me-2" (click)="deleteRecord(data)">{{ 'DELETE' | translate }}</button>
+                    <button class="btn btn-warning" (click)="editRecord(data)">{{ 'EDIT' | translate }}</button>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+    @else {
+    <h4>{{ 'RECORDS_NOT_FOUND' | translate }}</h4>
+    }
+</div>
