@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-address-book',
+    standalone: true,
     imports: [ReactiveFormsModule, TranslatePipe],
     templateUrl: './address-book.html',
     styleUrl: './address-book.css'
@@ -15,7 +16,7 @@ export class AddressBook {
     public recordData: any[] = [];
     public counter: number = 0;
 
-    constructor(private fb: FormBuilder, private translate: TranslateService) {
+    constructor(private fb: FormBuilder) {
         this.form = this.fb.group({
             id: [0],
             fname: ['', Validators.required],
